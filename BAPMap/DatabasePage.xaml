@@ -1,0 +1,190 @@
+﻿<Page x:Class="BAPMap.DatabasePage"
+      SnapsToDevicePixels="True"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="488" d:DesignWidth="1000"
+      Title="DatabasePage" MinHeight="488" MinWidth="1000" Background="Transparent">
+    <Page.Resources>
+        <ControlTemplate x:Key="DragMenuButton1" TargetType="Button">
+            <Grid Name="BtnDrag" Width="58">
+                <Border>
+                    <StackPanel>
+                        <Label Content="{TemplateBinding Content}" Background="Transparent" Foreground="White"
+                               FontSize="24" Padding="5 0 5 8" VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=BtnDrag}" Value="True">
+                                    <Setter Property="Background" Value="#143646"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="DragMenuButton2" TargetType="Button">
+            <Grid Name="BtnDrag" Width="58">
+                <Border CornerRadius="0 6 0 0">
+                    <StackPanel>
+                        <Label Content="{TemplateBinding Content}" Background="Transparent" Foreground="White"
+                               FontSize="20" Padding="5 5 5 8" VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=BtnDrag}" Value="True">
+                                    <Setter Property="Background" Value="#143646"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="MenuButton1" TargetType="Button">
+            <Grid Name="BtnMenu">
+                <Border>
+                    <StackPanel>
+                        <Label Content="{TemplateBinding Content}" Background="Transparent" FontSize="21" Padding="10 2 10 5"
+                               VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="Silver"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=BtnMenu}" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </StackPanel>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=BtnMenu}" Value="True">
+                                    <Setter Property="Background" Value="#174052"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="#2e7260"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10 0 0 2"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RowHeight" Value="35"/>
+            <Setter Property="FontSize" Value="21"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="DimGray"/>
+            <Setter Property="RowBackground" Value="Lavender"/>
+            <Setter Property="AlternatingRowBackground" Value="GhostWhite"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="Silver"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#669d7e"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="8 2 0 0">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#c9c9e3"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#669d7e"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type ScrollViewer}">
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+        </Style>
+    </Page.Resources>
+    <Border Background="White" CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid Name="DragMenu" Grid.Row="0">
+                <Border Background="#174052" CornerRadius="6 6 0 0" MouseDown="Border_MouseDown">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label Content="Работа с БД" Foreground="White" FontSize="22" Padding="10 0 0 2"
+                               VerticalContentAlignment="Center" Width="884"/>
+                        <Button Template="{StaticResource ResourceKey=DragMenuButton1}" Content="–"
+                                Click="BtnMinimize_Click"/>
+                        <Button Template="{StaticResource ResourceKey=DragMenuButton2}" Content="✕"
+                                Click="BtnClose_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Name="Menu" Grid.Row="1">
+                <Border Background="#143646">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Template="{StaticResource ResourceKey=MenuButton1}" Content="На главную"
+                                Click="BtnMain_Click"/>
+                        <Button Template="{StaticResource ResourceKey=MenuButton1}" Content="Расчёт БАП"
+                                Click="BtnMap_Click"/>
+                        <Border Background="#697f8c" Height="19" Width="1"/>
+                        <Button Template="{StaticResource ResourceKey=MenuButton1}" Content="Добавить" Click="AddBtn_Click"/>
+                        <Button Template="{StaticResource ResourceKey=MenuButton1}" Content="Сохранить" Click="SaveBtn_Click"/>
+                        <Button Template="{StaticResource ResourceKey=MenuButton1}" Content="Удалить" Click="RemoveBtn_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid Name="DataGrid" CanUserResizeColumns="False" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+                          HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ID}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Город" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Долгота" Width="*" Binding="{Binding Longitude}"/>
+                        <DataGridTextColumn Header="Широта" Width="*" Binding="{Binding Latitude}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Name="Footer" Grid.Row="3">
+                <Border Background="#174052" CornerRadius="0 0 6 6">
+                    <Label Content="Байкальский регион" Foreground="White" FontSize="22" Padding="0 0 0 2"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>
